@@ -298,6 +298,40 @@ function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
   );
 }
 
+// ─── Footer Component ─────────────────────────────────────────────────────────
+
+function Footer({ setPage }: { setPage: (p: Page) => void }) {
+  return (
+    <footer className="bg-card border-t-2 border-double border-primary/40 mt-12 font-sans select-none">
+      <div className="max-w-6xl mx-auto px-6 py-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <Logo size="sm" />
+            <p className="text-[10px] text-muted-foreground mt-2 max-w-xs font-serif italic text-justify leading-relaxed">
+              An independent sustainability journal monitoring consumer carbon footprinting and promoting local ecological alternatives.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-4 text-[9px] font-bold uppercase text-muted-foreground tracking-widest">
+            {(["about", "home"] as Page[]).map((p) => (
+              <button key={p} onClick={() => setPage(p)} className="hover:text-secondary transition-colors">
+                {p === "home" ? "Contact Desk" : "About the Gazette"}
+              </button>
+            ))}
+            <a href="#" className="hover:text-secondary">Privacy Policy</a>
+            <a href="#" className="hover:text-secondary">Subscription Terms</a>
+          </div>
+          <a href="https://github.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-secondary transition-colors">
+            <Github className="w-4 h-4" />
+          </a>
+        </div>
+        <div className="mt-8 pt-5 border-t border-primary/20 text-center text-[9px] text-muted-foreground font-serif uppercase tracking-widest">
+          © 2026 The Carbon Footprint Gazette. Printed Digitally. All Rights Reserved.
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 // ─── Camera Scanner Component ───────────────────────────────────────────────
 
 function CameraScanner({ onCapture, onCancel }: { onCapture: (file: File) => void; onCancel: () => void }) {
