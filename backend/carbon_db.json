@@ -1,0 +1,49 @@
+{
+    "Milk": {
+        "carbon": 3.2,
+        "alternative": "Soy Milk",
+        "saving": 2.0
+    },
+
+    "Bread": {
+        "carbon": 0.8,
+        "alternative": "Whole Wheat Bread",
+        "saving": 0.1
+    },
+
+    "Rice": {
+        "carbon": 4.0,
+        "alternative": "Millets",
+        "saving": 2.3
+    },
+
+    "Chicken": {
+        "carbon": 6.9,
+        "alternative": "Tofu",
+        "saving": 4.8
+    },
+
+    "Eggs": {
+        "carbon": 4.5,
+        "alternative": "Plant Protein",
+        "saving": 3.1
+    },
+
+    "Apple": {
+        "carbon": 0.4,
+        "alternative": "Local Apple",
+        "saving": 0.1
+    },
+
+    "Banana": {
+        "carbon": 0.8,
+        "alternative": "Local Banana",
+        "saving": 0.2
+    },
+
+    "Tomato": {
+        "carbon": 1.2,
+        "alternative": "Local Tomato",
+        "saving": 0.4
+    }
+}

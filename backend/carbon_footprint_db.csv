@@ -1,0 +1,64 @@
+category,product,unit,co2e_per_unit,impact_level,alternative,alternative_co2e_per_unit,savings_percent
+Meat & Protein,Beef,kg,27.0,high,Lentils,0.9,97
+Meat & Protein,Lamb,kg,24.5,high,Chicken,6.1,75
+Meat & Protein,Pork,kg,7.2,medium,Tofu,2.0,72
+Meat & Protein,Chicken,kg,6.1,medium,Tofu,2.0,67
+Meat & Protein,Fish (farmed),kg,5.4,medium,"Fish (wild-caught, sustainable)",3.0,44
+Meat & Protein,Shrimp (farmed),kg,18.0,high,Mussels,2.2,88
+Meat & Protein,Eggs,kg,4.5,medium,Tofu,2.0,56
+Meat & Protein,Tofu,kg,2.0,low,,,
+Meat & Protein,Lentils,kg,0.9,low,,,
+Meat & Protein,Chickpeas,kg,0.8,low,,,
+Dairy,Cheese,kg,13.5,high,Plant-based cheese,3.0,78
+Dairy,Butter,kg,12.0,high,Olive oil,3.2,73
+Dairy,Cow's Milk,litre,3.2,medium,Oat milk,0.9,72
+Dairy,Yogurt,kg,2.5,medium,Plant-based yogurt,1.1,56
+Dairy,Oat Milk,litre,0.9,low,,,
+Dairy,Almond Milk,litre,0.7,low,,,
+Dairy,Soy Milk,litre,0.6,low,,,
+Produce,Avocado,kg,2.5,medium,Local seasonal fruit,0.5,80
+Produce,Tomatoes (greenhouse),kg,2.1,medium,Tomatoes (seasonal/local),0.6,71
+Produce,Bananas,kg,0.8,low,,,
+Produce,Apples,kg,0.4,low,,,
+Produce,Potatoes,kg,0.3,low,,,
+Produce,Leafy Greens,kg,0.5,low,,,
+Produce,"Berries (out of season, flown)",kg,3.5,medium,Frozen berries,1.0,71
+Grains & Bakery,White Bread,kg,1.0,low,,,
+Grains & Bakery,Rice,kg,2.7,medium,Quinoa,1.6,41
+Grains & Bakery,Pasta,kg,1.2,low,,,
+Grains & Bakery,Cereal,kg,1.6,low,,,
+Beverages,Coffee (ground),kg,16.5,high,Tea,3.5,79
+Beverages,Tea,kg,3.5,medium,,,
+Beverages,Bottled Water (plastic),litre,0.3,low,Tap water / reusable bottle,0.01,97
+Beverages,Soda (canned),litre,0.5,low,Sparkling water,0.2,60
+Beverages,Beer,litre,0.7,low,,,
+Beverages,Wine,litre,1.8,low,,,
+Electronics,Smartphone,each,70.0,high,Refurbished smartphone,20.0,71
+Electronics,Laptop,each,300.0,high,Refurbished laptop,90.0,70
+Electronics,Tablet,each,110.0,high,Refurbished tablet,35.0,68
+Electronics,Headphones,each,15.0,medium,Wired headphones (no battery),6.0,60
+Electronics,Smartwatch,each,25.0,medium,,,
+Electronics,TV (55-inch LED),each,450.0,high,Smaller/refurbished TV,200.0,56
+Electronics,Alkaline Batteries (4-pack),pack,0.9,low,Rechargeable batteries,0.15,83
+Clothing & Textiles,Cotton T-Shirt,each,8.0,medium,Recycled/organic cotton T-shirt,3.5,56
+Clothing & Textiles,Jeans,each,20.0,high,Secondhand jeans,2.0,90
+Clothing & Textiles,Polyester Jacket,each,25.0,high,Wool/secondhand jacket,10.0,60
+Clothing & Textiles,Sneakers,pair,14.0,medium,Sneakers (recycled materials),7.0,50
+Clothing & Textiles,Wool Sweater,each,18.0,high,Secondhand sweater,2.0,89
+Household & Cleaning,Laundry Detergent,litre,1.2,low,Concentrated/eco detergent,0.5,58
+Household & Cleaning,Paper Towels,pack,2.3,medium,Reusable cloth towels,0.3,87
+Household & Cleaning,Plastic Trash Bags,pack,1.8,low,Biodegradable trash bags,1.0,44
+Household & Cleaning,Aluminum Foil,roll,3.0,medium,Reusable containers,0.2,93
+Household & Cleaning,Plastic Wrap,roll,1.5,low,Beeswax wrap,0.4,73
+Household & Cleaning,Dish Soap,litre,0.8,low,,,
+Household & Cleaning,Light Bulb (Incandescent),each,45.0,high,LED bulb,8.0,82
+Household & Cleaning,Light Bulb (LED),each,8.0,medium,,,
+Personal Care,Shampoo (plastic bottle),each,1.2,low,Shampoo bar,0.3,75
+Personal Care,Disposable Razor,each,0.4,low,Reusable razor,0.05,88
+Personal Care,Toothpaste (plastic tube),each,0.6,low,Toothpaste tablets,0.2,67
+Personal Care,Cotton Pads,pack,0.9,low,Reusable cotton rounds,0.1,89
+Packaging Materials,Plastic Bag,each,0.06,low,Reusable tote bag (per use),0.01,83
+Packaging Materials,Paper Bag,each,0.08,low,Reusable tote bag (per use),0.01,88
+Packaging Materials,Cardboard Box,each,0.7,low,,,
+Packaging Materials,Glass Jar,each,0.5,low,,,
+Packaging Materials,Aluminum Can,each,0.17,low,,,
