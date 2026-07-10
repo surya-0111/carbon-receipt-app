@@ -451,11 +451,28 @@ function QrScanner({ onScan, onCancel }: { onScan: (text: string) => void; onCan
       });
   };
 
+  const triggerDemo = () => {
+    setScanning(true);
+    setTimeout(() => {
+      setScanning(false);
+      const demoData = JSON.stringify({
+        items: [
+          { name: "Premium Beef Ribs", price: 420.0, carbon: 27.0, alternative: "Tofu / Legume Mix", saving: 25.5 },
+          { name: "Fresh Dairy Butter", price: 110.0, carbon: 3.2, alternative: "Soya Margarine / Avocado spread", saving: 2.2 },
+          { name: "Imported White Rice", price: 90.0, carbon: 2.5, alternative: "Local Organic Millets", saving: 1.5 },
+          { name: "Organic Local Spinach", price: 40.0, carbon: 0.8, alternative: "No suggestion", saving: 0.0 }
+        ],
+        total_carbon: 33.5
+      });
+      onScan(demoData);
+    }, 600);
+  };
+
   return (
     <div className="flex flex-col items-center bg-card rounded-none p-5 border border-primary/20 text-center select-none font-serif">
       <h3 className="text-sm font-bold mb-1.5 text-primary uppercase tracking-wider">[ QR bulletin reader ]</h3>
       <p className="text-xs text-muted-foreground max-w-xs mb-5 font-serif italic">
-        Import e-receipt data instantly by uploading receipt QR code graphics.
+        Import e-receipt data instantly by uploading receipt QR code graphics, or simulate a demo scan.
       </p>
       
       <div 
@@ -489,8 +506,14 @@ function QrScanner({ onScan, onCancel }: { onScan: (text: string) => void; onCan
         </div>
       )}
 
-      <div className="flex gap-4 mt-5 font-sans">
-        <button onClick={onCancel} className="px-4 py-1.5 border border-primary/30 rounded-none text-[10px] font-bold text-primary bg-background uppercase tracking-wider">
+      <div className="flex flex-col gap-3 mt-5 w-full max-w-xs font-sans">
+        <button 
+          onClick={triggerDemo}
+          className="w-full py-2 bg-secondary text-white rounded-none text-[10px] font-bold uppercase tracking-widest hover:opacity-90 transition flex items-center justify-center gap-1.5 shadow-sm border border-secondary"
+        >
+          <Sparkles className="w-3.5 h-3.5" /> Simulate Demo QR Scan
+        </button>
+        <button onClick={onCancel} className="w-full py-1.5 border border-primary/30 rounded-none text-[10px] font-bold text-primary bg-background uppercase tracking-wider">
           Cancel
         </button>
       </div>
@@ -715,9 +738,62 @@ function UploadZone({ onScanResult }: { onScanResult: (data: any) => void }) {
 
   const handleQrScan = async (decodedText: string) => {
     try {
-      const data = JSON.parse(decodedText);
-      if (data.items && data.total_carbon !== undefined) {
-        setUploaded("QR Code Receipt");
+      let data: any;
+      try {
+        data = JSON.parse(decodedText);
+      } catch {
+        // Fallback: If not JSON, parse as a list of item names (comma/newline separated)
+        const lines = decodedText.split(/[,\n]/).map(x => x.trim()).filter(Boolean);
+        if (lines.length > 0) {
+          const mockItems = lines.map(name => {
+            const lower = name.toLowerCase();
+            let price = 55.0;
+            let carbon = 1.1;
+            let alternative = "Local organic alternative";
+            let saving = 0.5;
+
+            if (lower.includes("beef") || lower.includes("lamb") || lower.includes("pork") || lower.includes("steak")) {
+              price = 380.0;
+              carbon = 27.0;
+              alternative = "Tofu / Legume Mix";
+              saving = 25.5;
+            } else if (lower.includes("chicken") || lower.includes("poultry") || lower.includes("meat")) {
+              price = 180.0;
+              carbon = 6.9;
+              alternative = "Tempeh strips";
+              saving = 5.4;
+            } else if (lower.includes("milk") || lower.includes("cheese") || lower.includes("butter") || lower.includes("dairy")) {
+              price = 120.0;
+              carbon = 3.2;
+              alternative = "Millet Milk / Almond Drink";
+              saving = 2.0;
+            } else if (lower.includes("rice") || lower.includes("bread") || lower.includes("grain")) {
+              price = 80.0;
+              carbon = 2.5;
+              alternative = "Millets / Quinoa grains";
+              saving = 1.5;
+            } else if (lower.includes("fish") || lower.includes("shrimp") || lower.includes("seafood")) {
+              price = 260.0;
+              carbon = 5.4;
+              alternative = "Plant-based sea fillet";
+              saving = 3.9;
+            }
+
+            return { name: name.replace(/[-*•]/g, "").trim(), price, carbon, alternative, saving };
+          });
+
+          const totalCarbon = mockItems.reduce((s, i) => s + i.carbon, 0);
+          data = {
+            items: mockItems,
+            total_carbon: totalCarbon
+          };
+        } else {
+          throw new Error("Empty text");
+        }
+      }
+
+      if (data && data.items && data.total_carbon !== undefined) {
+        setUploaded("QR Code e-Receipt");
         setReceiptItems(data.items);
         setTotalCarbon(data.total_carbon);
         setDone(true);
@@ -728,7 +804,7 @@ function UploadZone({ onScanResult }: { onScanResult: (data: any) => void }) {
       }
     } catch (e) {
       console.error(e);
-      alert("Decoded data is not a valid Carbon Receipt QR payload.");
+      alert("Could not interpret QR payload. Make sure the QR code holds a valid e-receipt JSON or a list of grocery items.");
     }
   };
 
