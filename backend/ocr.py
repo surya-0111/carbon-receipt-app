@@ -1,24 +1,29 @@
 import os
 
 reader = None
+IS_RENDER = os.environ.get("RENDER") == "true"
 
 def get_reader():
     """
-    Safely loads the EasyOCR model. If the environment runs out of memory (OOM),
-    or lacks libraries, it catches the error and degrades gracefully.
+    Safely loads the EasyOCR model. If running on Render, it automatically
+    bypasses the heavy model load to prevent process termination under the 512MB RAM limit.
     """
     global reader
     if reader is None:
-        try:
-            print("Loading EasyOCR model...")
-            import easyocr
-            # Load reader without GPU for CPU-restricted free tiers
-            reader = easyocr.Reader(['en'], gpu=False)
-            print("EasyOCR model loaded successfully.")
-        except Exception as e:
-            print(f"⚠️ EasyOCR failed to load (OOM or Library restriction): {e}.")
-            print("Fallback: Activating metadata-mock OCR engine.")
+        if IS_RENDER:
+            print("ℹ️ Render environment detected. Bypassing PyTorch/EasyOCR to prevent 512MB RAM OOM crashes.")
             reader = "mock"
+        else:
+            try:
+                print("Loading EasyOCR model...")
+                import easyocr
+                # Load reader without GPU for CPU-restricted environments
+                reader = easyocr.Reader(['en'], gpu=False)
+                print("EasyOCR model loaded successfully.")
+            except Exception as e:
+                print(f"⚠️ EasyOCR failed to load (OOM or Library restriction): {e}.")
+                print("Fallback: Activating metadata-mock OCR engine.")
+                reader = "mock"
     return reader
 
 def extract_text(image_path):
@@ -33,7 +38,6 @@ def extract_text(image_path):
         return generate_mock_ocr_text(image_path)
         
     try:
-        import easyocr
         if not isinstance(reader, str):
             result = reader.readtext(image_path)
             extracted = [detection[1] for detection in result]
