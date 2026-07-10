@@ -1055,6 +1055,54 @@ function DashboardPage({ setPage, initialTab = "scan" }: DashboardPageProps) {
   const [summaryBrief, setSummaryBrief] = useState("");
   const [loadingSummary, setLoadingSummary] = useState(false);
 
+  const [dailyTasks, setDailyTasks] = useState([
+    { id: "T1", label: "Scan 1 Grocery Receipt print copy", points: 50, done: false },
+    { id: "T2", label: "Substitute dairy/beef for legume alternatives", points: 30, done: false },
+    { id: "T3", label: "Consult the Eco-Editor Chatbot about carbon values", points: 20, done: false },
+    { id: "T4", label: "Calculate custom food emissions on the Estimator", points: 20, done: false }
+  ]);
+
+  const handleCompleteTask = async (taskId: string) => {
+    setDailyTasks((prev) =>
+      prev.map((task) => {
+        if (task.id === taskId && !task.done) {
+          const earned = task.points;
+          const newPoints = userStats.points + earned;
+
+          let newLevel = "Sprout Citizen";
+          if (newPoints >= 2000) newLevel = "Earth Guardian";
+          else if (newPoints >= 1000) newLevel = "Forest Guardian";
+          else if (newPoints >= 500) newLevel = "Eco Warrior";
+          else if (newPoints >= 200) newLevel = "Green Advocate";
+
+          const updatedStats = { ...userStats, points: newPoints, level: newLevel };
+          setUserStats(updatedStats);
+
+          db.saveUserStats("current_user", updatedStats).then(() => {
+            db.getLeaderboard().then((leaders) => {
+              const updatedLeaderboard = leaders.map((u: any) => {
+                if (u.name === "You" || u.name === "You (Suriya)") {
+                  return { ...u, points: newPoints, level: newLevel };
+                }
+                return u;
+              }).sort((a: any, b: any) => b.points - a.points);
+              setLeaderboard(updatedLeaderboard);
+            });
+          });
+
+          confetti({
+            particleCount: 80,
+            spread: 50,
+            origin: { y: 0.6 }
+          });
+
+          return { ...task, done: true };
+        }
+        return task;
+      })
+    );
+  };
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedReceipt, setSelectedReceipt] = useState<any | null>(null);
@@ -1364,6 +1412,37 @@ function DashboardPage({ setPage, initialTab = "scan" }: DashboardPageProps) {
                 <Star className="w-8 h-8 text-primary mx-auto mb-1" />
                 <p className="text-sm font-black text-primary uppercase">{userStats.level}</p>
                 <p className="text-[9px] uppercase font-bold text-muted-foreground font-sans mt-0.5 tracking-wider">Sourcing Rank</p>
+              </div>
+            </div>
+
+            {/* Daily Gazette Sourcing Checklist */}
+            <div className="border border-primary/25 p-4 rounded-none bg-card select-none">
+              <h3 className="text-xs font-bold text-primary mb-2.5 uppercase tracking-wide border-b border-primary/20 pb-1.5 flex items-center gap-1 font-serif">
+                <CheckCircle className="w-4 h-4 text-secondary animate-pulse" /> [ Daily Sourcing Tasks ]
+              </h3>
+              <div className="space-y-2 text-xs font-sans">
+                {dailyTasks.map((task) => (
+                  <div 
+                    key={task.id} 
+                    onClick={() => handleCompleteTask(task.id)}
+                    className={`flex items-center justify-between p-2 border border-primary/20 bg-background cursor-pointer hover:bg-muted/30 transition select-none ${
+                      task.done ? "opacity-60 line-through text-muted-foreground bg-muted/10 cursor-default" : ""
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <input 
+                        type="checkbox" 
+                        checked={task.done} 
+                        readOnly 
+                        className="rounded-none text-primary border-primary/30 focus:ring-0 w-3.5 h-3.5" 
+                      />
+                      <span className="font-semibold text-gray-800 text-[10.5px] leading-tight text-left">{task.label}</span>
+                    </div>
+                    <span className="font-mono text-[9px] font-bold text-secondary bg-secondary/15 border border-secondary/20 px-1.5 py-0.5 rounded-none flex-shrink-0">
+                      +{task.points} Pts
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -2021,6 +2100,25 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background font-serif text-foreground">
       <Nav page={page} setPage={setPage} />
+      {/* Newspaper News Ticker Marquee */}
+      {page !== "login" && page !== "signup" && (
+        <div className="relative flex overflow-x-hidden border-b border-primary/20 bg-card py-1.5 text-[9px] font-sans font-bold uppercase tracking-wider text-secondary select-none">
+          <div className="animate-marquee whitespace-nowrap flex gap-10">
+            <span>BULLETIN: Substituting beef with tofu reduces household emissions by 25kg CO₂ per swap •</span>
+            <span>UPDATE: Local farmer markets in Chennai accept Gazette eco-coupons •</span>
+            <span>TIP: Millets and organic grains require 70% less water than rice crops •</span>
+            <span>NOTICE: Scanned 120,000+ grocery receipts across South India •</span>
+            <span>ALERT: Switch to paperless e-receipts to save over 15g carbon footprint per check •</span>
+          </div>
+          <div className="absolute top-1.5 left-0 animate-marquee whitespace-nowrap flex gap-10 select-none pointer-events-none">
+            <span>BULLETIN: Substituting beef with tofu reduces household emissions by 25kg CO₂ per swap •</span>
+            <span>UPDATE: Local farmer markets in Chennai accept Gazette eco-coupons •</span>
+            <span>TIP: Millets and organic grains require 70% less water than rice crops •</span>
+            <span>NOTICE: Scanned 120,000+ grocery receipts across South India •</span>
+            <span>ALERT: Switch to paperless e-receipts to save over 15g carbon footprint per check •</span>
+          </div>
+        </div>
+      )}
       <main className="min-h-[75vh]">{renderPage()}</main>
       {page !== "login" && page !== "signup" && <Footer setPage={setPage} />}
     </div>
