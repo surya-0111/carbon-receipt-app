@@ -102,7 +102,7 @@ function Logo({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
       <div className="w-6 h-6 bg-primary text-background flex items-center justify-center rounded-none border border-primary">
         <Leaf className="w-3.5 h-3.5" />
       </div>
-      <span className="tracking-tight uppercase font-black">The Gazette</span>
+      <span className="tracking-tight uppercase font-black">Carbon Receipt</span>
     </div>
   );
 }
@@ -314,7 +314,7 @@ function Footer({ setPage }: { setPage: (p: Page) => void }) {
           <div className="flex flex-wrap gap-4 text-[9px] font-bold uppercase text-muted-foreground tracking-widest">
             {(["about", "home"] as Page[]).map((p) => (
               <button key={p} onClick={() => setPage(p)} className="hover:text-secondary transition-colors">
-                {p === "home" ? "Contact Desk" : "About the Gazette"}
+                {p === "home" ? "Contact Desk" : "About this Project"}
               </button>
             ))}
             <a href="#" className="hover:text-secondary">Privacy Policy</a>
@@ -325,7 +325,7 @@ function Footer({ setPage }: { setPage: (p: Page) => void }) {
           </a>
         </div>
         <div className="mt-8 pt-5 border-t border-primary/20 text-center text-[9px] text-muted-foreground font-serif uppercase tracking-widest">
-          © 2026 The Carbon Footprint Gazette. Printed Digitally. All Rights Reserved.
+          © 2026 The Carbon Footprint Receipt. Printed Digitally. All Rights Reserved.
         </div>
       </div>
     </footer>
@@ -502,7 +502,7 @@ function QrScanner({ onScan, onCancel }: { onScan: (text: string) => void; onCan
 
 function EcoChatbot({ receiptContext }: { receiptContext?: { items: any[]; total_carbon: number } }) {
   const [messages, setMessages] = useState<{ sender: "user" | "bot"; text: string }[]>([
-    { sender: "bot", text: "Welcome to the Editorial Desk of The Carbon Footprint Gazette. I am your Eco-Editor. Ask me anything about sustainable living, receipt alternatives, or carbon footprints!" }
+    { sender: "bot", text: "Welcome to the Editorial Desk of The Carbon Footprint Receipt. I am your Eco-Editor. Ask me anything about sustainable living, receipt alternatives, or carbon footprints!" }
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -944,7 +944,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
       {/* Newspaper Header Masthead */}
       <div className="newspaper-masthead text-center select-text">
         <h1 className="text-4xl md:text-6xl font-serif font-black uppercase tracking-tighter text-primary">
-          THE CARBON FOOTPRINT GAZETTE
+          THE CARBON FOOTPRINT RECEIPT
         </h1>
         <div className="flex justify-between items-center border-y-2 border-double border-primary/40 py-2 mt-4 text-[9px] uppercase font-bold tracking-widest text-muted-foreground font-sans">
           <span>Vol. CIV No. 192</span>
@@ -965,7 +965,7 @@ function HomePage({ setPage }: { setPage: (p: Page) => void }) {
           </h2>
           <p className="text-foreground leading-relaxed text-sm">
             <span className="float-left text-4xl font-serif font-bold text-secondary mr-2 line-height-none">C</span>
-            onsumer products represent over 60% of global greenhouse emissions. Yet, carbon values remain opaque on standard receipts. The Gazette’s AI-powered analyzer extracts purchase logs and calculates immediate lifecycle footprint statistics to help shoppers choose ecological alternatives.
+            onsumer products represent over 60% of global greenhouse emissions. Yet, carbon values remain opaque on standard receipts. This app’s AI-powered analyzer extracts purchase logs and calculates immediate lifecycle footprint statistics to help shoppers choose ecological alternatives.
           </p>
           <div className="flex flex-wrap gap-3 pt-3 font-sans">
             <button
@@ -1218,7 +1218,7 @@ function DashboardPage({ setPage, initialTab = "scan" }: DashboardPageProps) {
       {/* Title */}
       <div className="text-center mb-6 border-b border-primary/30 pb-3">
         <h1 className="text-xl md:text-2xl font-black text-primary uppercase tracking-tight">
-          {activeTab === "archives" ? "THE GAZETTE DIGITAL ARCHIVES" : "THE ACTIVE SUSTAINABILITY DESK"}
+          {activeTab === "archives" ? "THE DIGITAL ARCHIVES" : "THE ACTIVE SUSTAINABILITY DESK"}
         </h1>
         <p className="text-[10px] text-muted-foreground uppercase font-sans font-bold tracking-widest mt-1">
           {activeTab === "archives" ? "Historical Sourcing Logs & Analytics Database" : "Receipt Scanning, Challenges, & Green Estimator"}
@@ -1264,7 +1264,7 @@ function DashboardPage({ setPage, initialTab = "scan" }: DashboardPageProps) {
                   <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-b from-gray-200/80 to-transparent pointer-events-none" />
                   <div className="text-center font-bold mb-4 uppercase tracking-tighter">
                     <p className="text-xs">*** e-RECEIPT ANALYZED ***</p>
-                    <p className="text-[8px] tracking-widest mt-0.5">THE CARBON GAZETTE DESK</p>
+                    <p className="text-[8px] tracking-widest mt-0.5">THE CARBON FOOTPRINT RECEIPT</p>
                     <div className="border-t border-dashed border-black/35 my-2" />
                     <div className="text-left font-normal text-[9px] space-y-0.5">
                       <p>STORE : {uploaded ? uploaded.replace(/\.[^/.]+$/, "").toUpperCase() : "GENERAL GROCERY"}</p>
@@ -1364,7 +1364,7 @@ function DashboardPage({ setPage, initialTab = "scan" }: DashboardPageProps) {
                     {summaryBrief}
                   </p>
                   <div className="border-t border-primary/20 pt-2.5 mt-4 text-[9px] text-muted-foreground uppercase font-sans font-bold flex justify-between">
-                    <span>Editor: Gazette AI</span>
+                    <span>Editor: AI Assistant</span>
                     <span>Review: Passed</span>
                   </div>
                 </div>
@@ -1668,7 +1668,7 @@ function DashboardPage({ setPage, initialTab = "scan" }: DashboardPageProps) {
                 <div className="bg-white border border-black/15 p-4 text-black font-mono text-[10px] select-none mt-4 max-h-[60vh] overflow-y-auto">
                   <div className="text-center font-bold mb-4 uppercase tracking-tighter">
                     <p className="text-xs">*** HISTORICAL LOG ***</p>
-                    <p className="text-[8px] tracking-widest mt-0.5">THE CARBON GAZETTE ARCHIVES</p>
+                    <p className="text-[8px] tracking-widest mt-0.5">THE CARBON FOOTPRINT RECEIPT ARCHIVES</p>
                     <div className="border-t border-dashed border-black/35 my-2" />
                     <div className="text-left font-normal text-[9px] space-y-0.5">
                       <p>STORE : {selectedReceipt.store.toUpperCase()}</p>
@@ -1688,7 +1688,7 @@ function DashboardPage({ setPage, initialTab = "scan" }: DashboardPageProps) {
                   </div>
                   <div className="border-t-2 border-double border-black/35 my-3" />
                   <div className="text-center text-[8px] uppercase tracking-wide text-gray-400">
-                    <p>Scanned via Gazette Reader</p>
+                    <p>Scanned via Carbon Receipt Reader</p>
                     <p className="font-bold mt-0.5">*** COPY OF RECORD ***</p>
                   </div>
                 </div>
@@ -1732,7 +1732,7 @@ function AboutPage({ setPage }: { setPage: (p: Page) => void }) {
     <div className="max-w-6xl mx-auto px-6 py-6 select-none font-serif text-justify">
       <div className="newspaper-masthead text-center mb-6 select-text">
         <h1 className="text-2xl font-black uppercase text-primary tracking-tight">EDITORIAL BOARD & MISSION</h1>
-        <p className="text-[10px] text-muted-foreground uppercase font-sans font-bold tracking-widest mt-1">Foundational Ethics of the Gazette</p>
+        <p className="text-[10px] text-muted-foreground uppercase font-sans font-bold tracking-widest mt-1">Foundational Ethics of this Journal</p>
       </div>
 
       <section className="grid md:grid-cols-3 gap-8 items-start border-b border-primary/20 pb-8 select-text">
@@ -1830,7 +1830,7 @@ function LoginPage({ setPage }: { setPage: (p: Page) => void }) {
             <CheckCircle className="w-6 h-6" />
           </div>
           <h2 className="text-sm font-bold text-primary mb-2 uppercase border-b border-primary/20 pb-1.5 tracking-wider">Subscription Confirmed</h2>
-          <p className="text-[10px] text-muted-foreground mt-2 mb-5">Welcome back to the Gazette database desk.</p>
+          <p className="text-[10px] text-muted-foreground mt-2 mb-5">Welcome back to the database desk.</p>
           <button onClick={() => setPage("dashboard")} className="px-4 py-2 bg-primary border border-primary text-background text-[10px] font-bold uppercase rounded-none tracking-widest shadow-sm font-sans hover:bg-secondary">
             Go to Desk
           </button>
@@ -1966,7 +1966,7 @@ function SignUpPage({ setPage }: { setPage: (p: Page) => void }) {
             <Leaf className="w-6 h-6" />
           </div>
           <h2 className="text-sm font-bold text-primary mb-2 uppercase border-b border-primary/20 pb-1.5 tracking-wider">Subscribed! 🌱</h2>
-          <p className="text-[10px] text-muted-foreground mt-2 mb-5">Welcome to the Carbon Gazette team, <strong>{form.name}</strong>.</p>
+          <p className="text-[10px] text-muted-foreground mt-2 mb-5">Welcome to the Carbon Receipt team, <strong>{form.name}</strong>.</p>
           <button onClick={() => setPage("dashboard")} className="px-5 py-2 bg-primary border border-primary text-background text-[10px] font-bold uppercase rounded-none tracking-widest shadow-sm font-sans hover:bg-secondary">
             Open Dashboard
           </button>
@@ -2105,14 +2105,14 @@ export default function App() {
         <div className="relative flex overflow-x-hidden border-b border-primary/20 bg-card py-1.5 text-[9px] font-sans font-bold uppercase tracking-wider text-secondary select-none">
           <div className="animate-marquee whitespace-nowrap flex gap-10">
             <span>BULLETIN: Substituting beef with tofu reduces household emissions by 25kg CO₂ per swap •</span>
-            <span>UPDATE: Local farmer markets in Chennai accept Gazette eco-coupons •</span>
+            <span>UPDATE: Local farmer markets in Chennai accept Carbon Receipt eco-coupons •</span>
             <span>TIP: Millets and organic grains require 70% less water than rice crops •</span>
             <span>NOTICE: Scanned 120,000+ grocery receipts across South India •</span>
             <span>ALERT: Switch to paperless e-receipts to save over 15g carbon footprint per check •</span>
           </div>
           <div className="absolute top-1.5 left-0 animate-marquee whitespace-nowrap flex gap-10 select-none pointer-events-none">
             <span>BULLETIN: Substituting beef with tofu reduces household emissions by 25kg CO₂ per swap •</span>
-            <span>UPDATE: Local farmer markets in Chennai accept Gazette eco-coupons •</span>
+            <span>UPDATE: Local farmer markets in Chennai accept Carbon Receipt eco-coupons •</span>
             <span>TIP: Millets and organic grains require 70% less water than rice crops •</span>
             <span>NOTICE: Scanned 120,000+ grocery receipts across South India •</span>
             <span>ALERT: Switch to paperless e-receipts to save over 15g carbon footprint per check •</span>

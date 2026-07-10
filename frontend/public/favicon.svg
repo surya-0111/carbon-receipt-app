@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Round deep wood brown print press seal base -->
+  <rect x="10" y="10" width="80" height="80" rx="10" fill="#4e3629" />
+  <!-- Broadside paper print slice -->
+  <path d="M30 22h40v56l-5-4-5 4-5-4-5 4-5-4-5 4-5-4z" fill="#faf6f0" />
+  <!-- Leaf icon inside broadside -->
+  <path d="M50 30c8 8 12 18 7 26s-14 8-18 8 0-10 6-18 9-12 5-16z" fill="#8e3020" />
+  <path d="M50 30c-8 8-12 18-7 26s14 8 18 8 0-10-6-18-9-12-5-16z" fill="#386641" />
+</svg>
